@@ -1,5 +1,5 @@
-#include "mxIgraph.h"
-#include "speak_easy_2.h"
+#include <mxIgraph.h>
+#include <speak_easy_2.h>
 
 #include <igraph_interface.h>
 #include <string.h>

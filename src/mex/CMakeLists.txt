@@ -9,6 +9,17 @@ target_include_directories(mexSE2
   PRIVATE ${Matlab_INCLUDE_DIRS}
 )
 
+matlab_add_mex(NAME mexVersion
+  MODULE
+  SRC version.c
+  LINK_TO SpeakEasy2
+  R2018a
+)
+
+target_include_directories(mexVersion
+  PRIVATE ${Matlab_INCLUDE_DIRS}
+)
+
 matlab_add_mex(NAME isdirected
   MODULE
   SRC isdirected.c

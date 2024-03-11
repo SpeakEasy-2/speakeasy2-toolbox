@@ -2,6 +2,10 @@ function c = speakeasy2(g, opts)
 %SPEAKEASY2 community detection
 %   MEMBERSHIP = SPEAKEASY2(G) Cluster the graph G.
 %
+%   SPEAKEASY2('VERSION') display the toolbox version.
+%
+%   VERSION = SPEAKEASY2('VERSION') return the toolbox version string.
+%
 %   MEMBERSHIP = SPEAKEASY2(G, 'PARAM1', VAL1, 'PARAM2', VAL2, ...) the
 %       behavior of speakeasy2 can be modified through name-value pairs.
 %       Available options are described in the table below.
@@ -35,7 +39,7 @@ function c = speakeasy2(g, opts)
 %                          (default false)
 
     arguments
-        g {mustBeAdj};
+        g {mustBeAdjOrVersion};
         opts.isdirected (1, 1) logical = isdirected(g);
         opts.discardTransient (1, 1) {mustBePositive, mustBeInteger} = 3;
         opts.independentRuns (1, 1) {mustBePositive, mustBeInteger} = 10;
@@ -49,6 +53,15 @@ function c = speakeasy2(g, opts)
             defaultTargetClusters(g);
         opts.targetPartitions (1, 1) {mustBePositive, mustBeInteger} = 5;
         opts.verbose = false;
+    end
+
+    if ischar(g)
+        if nargout == 0
+            disp(sprintf("  SpeakEasy2 version: %s", mexVersion()));
+        else
+            c = mexVersion();
+        end
+        return
     end
 
     if opts.multiCommunity ~= 1

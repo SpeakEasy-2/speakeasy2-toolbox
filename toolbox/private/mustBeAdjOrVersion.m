@@ -1,5 +1,9 @@
-function mustBeAdj(adj)
+function mustBeAdjOrVersion(adj)
 %MUSTBEADJ assert the argument is a valid adjacency matrix
+
+    if (ischar(adj) || isstring(adj)) && strcmpi(adj, 'version')
+        return;
+    end
 
     eid = "SE2:NotAdj";
     msg = "";
