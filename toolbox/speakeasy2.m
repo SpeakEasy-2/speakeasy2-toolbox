@@ -1,14 +1,19 @@
-function c = speakeasy2(g, opts)
+function [memb, ordering] = speakeasy2(g, opts)
 %SPEAKEASY2 community detection
 %   MEMBERSHIP = SPEAKEASY2(G) Cluster the graph G.
+%
+%   [MEMB, ORDERING] = SPEAKEASY2(G) provide an index vector to order nodes
+%   based on the community they are in, in order from largest community to
+%   smallest. This can be used with HEATMAP or IMAGESC to help display
+%   communities.
 %
 %   SPEAKEASY2('VERSION') display the toolbox version.
 %
 %   VERSION = SPEAKEASY2('VERSION') return the toolbox version string.
 %
 %   MEMBERSHIP = SPEAKEASY2(G, 'PARAM1', VAL1, 'PARAM2', VAL2, ...) the
-%       behavior of speakeasy2 can be modified through name-value pairs.
-%       Available options are described in the table below.
+%   behavior of speakeasy2 can be modified through name-value pairs. Available
+%   options are described in the table below.
 %
 %        Name              Description
 %       ------------------------------------------------------------------
@@ -79,7 +84,11 @@ function c = speakeasy2(g, opts)
               "Subclustering has not been implemented.")
     end
 
-    c = mexSE2(g, opts);
+    if nargout == 2
+        [memb, ordering] = mexSE2(g, opts);
+    else
+        memb = mexSE2(g, opts);
+    end
 end
 
 function n = defaultTargetClusters(g)
