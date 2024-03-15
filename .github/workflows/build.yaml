@@ -1,0 +1,182 @@
+name: Build packages
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+permissions:
+  checks: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  build-linux:
+    name: Build Linux toolbox
+    runs-on: ubuntu-20.04
+    env:
+      CC: gcc-10
+      CXX: g++-10
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Clone igraph
+        run: |
+          cd vendor/speakeasy2
+          git submodule init
+          git submodule update --recursive
+
+      - name: Install dependencies
+        run: |
+          sudo apt update && sudo apt upgrade
+          sudo apt install cmake ninja-build gcc-10 g++-10 libxml2-dev libbison-dev libfl-dev
+
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v2
+
+      - name: Build from source
+        run: |
+          cmake -B build . -G Ninja \
+            -DCMAKE_PACKAGE_VERSION="${{ github.ref_name }}"
+          cmake --build build --target package
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: SpeakEasy2-${{ runner.os }}-${{ github.sha }}
+          path: build/
+
+  build-windows:
+    name: Build Windows toolbox
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        shell:  msys2 {0}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Install packages
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: ucrt64
+          install: >-
+            git
+            base-devel
+            mingw-w64-ucrt-x86_64-cmake
+            mingw-w64-ucrt-x86_64-ninja
+            mingw-w64-ucrt-x86_64-toolchain
+            mingw-w64-ucrt-x86_64-libxml2
+          update: true
+          location: D:\
+
+      - name: Clone igraph
+        run: |
+          cd vendor/speakeasy2
+          git submodule init
+          git submodule update --recursive
+
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v2
+
+      - name: Build from source
+        run: |
+          cmake -B build . \
+            -G Ninja \
+            -DIGRAPH_OPENMP_SUPPORT=ON \
+            -DCMAKE_PACKAGE_VERSION="${{ github.ref_name }}"
+          cmake --build build --target package
+
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: SpeakEasy2-${{ runner.os }}-${{ github.sha }}
+          path: build/
+
+  build-macos:
+    name: Build macOS toolbox
+    runs-on: macos-latest
+    # Use system Clang (supports openmp) instead of XCode Clang.
+    # See https://gist.github.com/svenevs/f00ed3898d2af6248921b63254aa8cc1
+    env:
+      CC: /usr/bin/clang
+      CXX: /usr/bin/clang++
+      CPPFLAGS: "-Xpreprocessor -fopenmp"
+      CFLAGS: "-I/usr/local/opt/libomp/include"
+      CXXFLAGS: "-I/usr/local/opt/libomp/include"
+      LDFLAGS: "-Wl,-rpath,/usr/local/opt/libomp/lib -L/usr/local/opt/libomp/lib -lomp"
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Clone igraph
+        run: |
+          cd vendor/speakeasy2
+          git submodule init
+          git submodule update --recursive
+
+      - name: Install dependencies
+        run: brew install ninja autoconf automake libtool libomp
+
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v2
+
+      - name: Build from source
+        run: |
+          cmake -B build . -G Ninja \
+            -DCMAKE_PACKAGE_VERSION="${{ github.ref_name }}"
+          cmake --build build --target package
+
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: SpeakEasy2-${{ runner.os }}-${{ github.sha }}
+          path: build/
+
+  aggregate:
+    name: Aggregate toolboxes
+    needs: [build-linux, build-windows, build-macos]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Collect OS specific toolboxes
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Extract files
+        run: |
+          mkdir release
+          cd artifacts
+          mkdir SpeakEasy2_{Linux,macOS,Windows}-toolbox
+          tar xzf SpeakEasy2-Linux-${{ github.sha }}/SpeakEasy2-toolbox*.tar.gz --directory SpeakEasy2_Linux-toolbox/
+          tar xzf SpeakEasy2-macOS-${{ github.sha }}/SpeakEasy2-toolbox*.tar.gz --directory SpeakEasy2_macOS-toolbox
+          unzip SpeakEasy2-Windows-${{ github.sha }}/SpeakEasy2-toolbox*.zip -d SpeakEasy2_Windows-toolbox
+          cd ..
+
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v2
+
+      - name: Make toolboxes
+        uses: matlab-actions/run-command@v2
+        with:
+          command: addpath(".github/workflows"), buildAllToolboxes("artifacts", "release", "${{ github.ref_name }}")
+
+      - name: Upload generic toolbox
+        uses: actions/upload-artifact@v4
+        with:
+            name: SpeakEasy2-toolbox-${{ github.sha }}
+            path: release/*

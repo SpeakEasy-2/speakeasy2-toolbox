@@ -32,7 +32,6 @@ message(STATUS "${CMAKE_PROJECT_NAME} version: ${CMAKE_PACKAGE_VERSION}")
 
 # NOTE: speakeasy2 builds the igraph C lib.
 add_subdirectory(vendor/speakeasy2)
-add_subdirectory(vendor/matlab-igraph/mxIgraph)
 
 find_package(Matlab COMPONENTS MAIN_PROGRAM MAT_LIBRARY MX_LIBRARY MEX_COMPILER REQUIRED)
 message(STATUS "Matlab: ${Matlab_VERSION_STRING}")
@@ -62,10 +61,11 @@ message(STATUS "MEX extension: ${Matlab_MEX_EXTENSION}")
 message(STATUS "Matlab arch: ${Matlab_ARCH}")
 message(STATUS "")
 
+add_subdirectory(vendor/matlab-igraph/mxIgraph)
 add_subdirectory(src/mex)
 
 # Installation
-install(DIRECTORY matlab/toolbox
+install(DIRECTORY toolbox
   DESTINATION speakeasy2
   COMPONENT toolbox)
 
