@@ -1,4 +1,8 @@
 # SpeakEasy 2: Champagne MATLAB toolbox
+
+[![Open SpeakEasy2 in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/fileexchange/v1?id=16123)
+[![View SpeakEasy2 on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/161231-speakeasy2)
+
 [Genome Biology article.](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-03062-0)
 
 A MATLAB toolbox for calling the SpeakEasy 2 (SE2) community detection algorithm. Calls [the SpeakEasy2 C library](https://github.com/SpeakEasy-2/libspeakeasy2). Clusters graphs represented as adjacency matrices (see [matlab-igraph](https://github.com/DavidRConnell/matlab-igraph) for working with graphs in MATLAB).
