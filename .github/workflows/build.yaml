@@ -48,7 +48,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: SpeakEasy2-${{ runner.os }}-${{ github.sha }}
-          path: build/
+          path: build/SpeakEasy2-toolbox_*-toolbox.tar.gz
 
   build-windows:
     name: Build Windows toolbox
@@ -99,7 +99,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: SpeakEasy2-${{ runner.os }}-${{ github.sha }}
-          path: build/
+          path: build/SpeakEasy2-toolbox_*-toolbox.zip
 
   build-macos:
     name: Build macOS toolbox
@@ -142,7 +142,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: SpeakEasy2-${{ runner.os }}-${{ github.sha }}
-          path: build/
+          path: build/SpeakEasy2-toolbox_*-toolbox.tar.gz
 
   aggregate:
     name: Aggregate toolboxes
@@ -162,9 +162,9 @@ jobs:
           mkdir release
           cd artifacts
           mkdir SpeakEasy2_{Linux,macOS,Windows}-toolbox
-          tar xzf SpeakEasy2-Linux-${{ github.sha }}/SpeakEasy2-toolbox*.tar.gz --directory SpeakEasy2_Linux-toolbox/
-          tar xzf SpeakEasy2-macOS-${{ github.sha }}/SpeakEasy2-toolbox*.tar.gz --directory SpeakEasy2_macOS-toolbox
-          unzip SpeakEasy2-Windows-${{ github.sha }}/SpeakEasy2-toolbox*.zip -d SpeakEasy2_Windows-toolbox
+          tar xzf SpeakEasy2-Linux-${{ github.sha }}/SpeakEasy2-toolbox*.tar.gz --directory SpeakEasy2-Linux-${{ github.sha }}
+          tar xzf SpeakEasy2-macOS-${{ github.sha }}/SpeakEasy2-toolbox*.tar.gz --directory SpeakEasy2-macOS-${{ github.sha }}
+          unzip SpeakEasy2-Windows-${{ github.sha }}/SpeakEasy2-toolbox*.zip -d SpeakEasy2-Windows-${{ github.sha }}
           cd ..
 
       - name: Set up MATLAB

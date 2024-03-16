@@ -1,11 +1,11 @@
 function buildAllToolboxes(artifactsDir, outDir, version)
     tmpDir = "tmp/speakeasy2";
     compiledFileDirs = {"private"};
-    for d = dir(artifactsDir + "/speakeasy_2*")'
+    for d = dir(artifactsDir + "/SpeakEasy2-*")'
         toolboxDir = fullfile(artifactsDir, d(1).name, ...
                               "speakeasy2", "toolbox");
         zipFile = dir(fullfile(artifactsDir, d(1).name, ...
-                               "SpeakEasy2" + version + "*"));
+                               "SpeakEasy2-toolbox_" + version + "*"));
         arch = regexp(zipFile.name, version + '_(.*)-toolbox', "tokens");
 
         if ~exist(tmpDir, 'dir')
