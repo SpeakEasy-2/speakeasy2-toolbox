@@ -42,6 +42,8 @@ function [memb, ordering] = speakeasy2(g, opts)
 %                          (default 5).
 %        verbose           Whether to print information about progress
 %                          (default false)
+%
+%   See also SE2.ORDER
 
     arguments
         g {mustBeAdjOrVersion};
@@ -60,11 +62,11 @@ function [memb, ordering] = speakeasy2(g, opts)
         opts.verbose = false;
     end
 
-    if ischar(g)
+    if ischar(g) || isstring(g)
         if nargout == 0
-            disp(sprintf("  SpeakEasy2 version: %s", mexVersion()));
+            se2.version();
         else
-            memb = mexVersion();
+            memb = se2.version();
         end
         return
     end

@@ -74,6 +74,11 @@ install(TARGETS mexSE2 isdirected
   RUNTIME_DEPENDENCY_SET toolbox_deps
   COMPONENT toolbox)
 
+install(TARGETS mexOrder mexVersion
+  DESTINATION speakeasy2/toolbox/+se2/private
+  RUNTIME_DEPENDENCY_SET toolbox_deps
+  COMPONENT toolbox)
+
 if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
   install(RUNTIME_DEPENDENCY_SET toolbox_deps
     DIRECTORIES
