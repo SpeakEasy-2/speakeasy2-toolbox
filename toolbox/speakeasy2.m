@@ -64,7 +64,7 @@ function [memb, ordering] = speakeasy2(g, opts)
         if nargout == 0
             disp(sprintf("  SpeakEasy2 version: %s", mexVersion()));
         else
-            c = mexVersion();
+            memb = mexVersion();
         end
         return
     end
