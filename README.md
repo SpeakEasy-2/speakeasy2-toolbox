@@ -35,7 +35,10 @@ This will build mex files to `./build/src/mex` to run the toolbox in the current
 ## Use
 
 ```matlab
-adj = igraph.famous("Zachary"); % Requires matlab-igraph toolbox
+% Requires matlab-igraph toolbox
+blockSizes = [10 10 10 10 20 20 30];
+adj = igraph.randgame("preference", blockSizes=blockSizes, mixingParam=0.2);
+adj = (adj + adj') > 0; % Make symmetric
 membership = speakeasy2(adj);
 igraph.plot(adj, membership=membership)
 ```
