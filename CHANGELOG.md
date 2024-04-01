@@ -10,6 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - SE2 namespace.
+- Subclustering.
+- Hierarchical ordering.
+- Order by degree within communities.
+
+### Changed
+
+- Update to matlab-igraph 0.1.13 (changes to how datatypes are converted).
+- Update to libspeakeasy2 0.1.2 (adds subclustering).
 
 ### Fixed
 

@@ -40,6 +40,12 @@ function [memb, ordering] = speakeasy2(g, opts)
 %                          the size of the graph.
 %        targetPartitions  Number of partitions to find per independent run
 %                          (default 5).
+%        subcluster        Depth of clustering (default 1). If greater than 1,
+%                          perform recursive clusering on each community found
+%                          at the previous level.
+%        minCluster        Minimum cluster to subcluster (default 5). If a
+%                          community is less than this size, it will not be
+%                          clustered any further.
 %        verbose           Whether to print information about progress
 %                          (default false)
 %
@@ -51,11 +57,11 @@ function [memb, ordering] = speakeasy2(g, opts)
         opts.discardTransient (1, 1) {mustBePositive, mustBeInteger} = 3;
         opts.independentRuns (1, 1) {mustBePositive, mustBeInteger} = 10;
         opts.maxThreads (1, 1) {mustBeNonnegative, mustBeInteger} = 0;
-        opts.minClusters (1, 1) {mustBePositive, mustBeInteger} = 1;
         opts.multiCommunity (1, 1) {mustBePositive, mustBeInteger} = 1;
         opts.nodeConfidence (1, 1) logical = false;
         opts.seed (1, 1) {mustBePositive, mustBeInteger} = randi([1, 9999]);
         opts.subcluster (1, 1) {mustBePositive, mustBeInteger} = 1;
+        opts.minCluster (1, 1) {mustBePositive, mustBeInteger} = 5;
         opts.targetClusters (1, 1) {mustBePositive, mustBeInteger} = ...
             defaultTargetClusters(g);
         opts.targetPartitions (1, 1) {mustBePositive, mustBeInteger} = 5;
@@ -81,11 +87,6 @@ function [memb, ordering] = speakeasy2(g, opts)
               "Node confidence has not been implemented.");
     end
 
-    if (opts.subcluster ~= 1) || (opts.minClusters ~= 1)
-        error("SE2:NotImplemented", ...
-              "Subclustering has not been implemented.")
-    end
-
     if nargout == 2
         [memb, ordering] = mexSE2(g, opts);
     else
@@ -95,7 +96,7 @@ end
 
 function n = defaultTargetClusters(g)
     nNodes = length(g);
-    n = nNodes / 100;
+    n = ceil(nNodes / 100);
     if n < 10
         n = 10;
     end
