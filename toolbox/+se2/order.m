@@ -15,7 +15,7 @@ function indices = order(graph, membership)
 %   See also SPEAKEASY2.
 
     arguments
-        graph (:, :) {mustBeNumeric};
+        graph (:, :);
         membership (:, :) {mustBeInteger, mustBeNonnegative};
     end
 
