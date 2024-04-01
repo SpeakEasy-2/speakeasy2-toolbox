@@ -53,6 +53,8 @@ The options can also be found by running `help speakeasy2`.
 | targetPartitions | integer | 5 | Number of partitions to find per independent run. |
 | discardTransient | integer | 3 | Ignore this many partitions before tracking. |
 | targetClusters | integer | dependent on size of graph | Expected number of clusters to find. Used for creating the initial conditions. The final partition is not constrained to having this many clusters. |
+| subCluster | integer | 1 | How many iterations of community detection to perform. If > 1, community detection is performed on each community from the previous level. |
+| minCluster | integer | 5 | Minimum community size to perform subclustering on. If `subCluster == 1`, ignored. |
 | seed | integer | randomly generated | a random seed for reproducibility. |
 | maxThreads | integer | Value returned by `omp_get_num_threads` | number of parallel threads to use. (Use 1 to prevent parallel processing.)|
 | verbose | boolean | false | Whether to print extra information about the running process. |
