@@ -56,22 +56,21 @@ function calculateBoundaries(h, membership, order, level)
 end
 
 function drawClusters(h)
-    UserData = h.Parent.Parent.UserData;
+    fig = h.Parent.Parent;
+    UserData = fig.UserData;
     leftBoundary = UserData.leftBoundary;
     rightBoundary = UserData.rightBoundary;
     idx = UserData.idx;
 
     hold on
-    for c = leftBoundary(idx)
-        xline(c - 0.5, alpha = 0.1, linestyle='--');
-        yline(c - 0.5, alpha = 0.1, linestyle='--');
-    end
-
-    for c = rightBoundary(idx)
-        xline(c + 0.5, alpha = 0.1, linestyle='--');
-        yline(c + 0.5, alpha = 0.1, linestyle='--');
-    end
+    lines = [
+        xline(leftBoundary(idx) - 0.5, alpha = 0.1, linestyle = '--'),
+        yline(leftBoundary(idx) - 0.5, alpha = 0.1, linestyle = '--'),
+        xline(rightBoundary(idx) + 0.5, alpha = 0.1, linestyle = '--'),
+        yline(rightBoundary(idx) + 0.5, alpha = 0.1, linestyle = '--'),
+    ];
     hold off
+    fig.UserData.lines = lines;
 
     ticks = cumsum(rightBoundary - leftBoundary + 1);
     ticks = ticks - ((rightBoundary - leftBoundary + 1) / 2);
@@ -85,11 +84,7 @@ function drawClusters(h)
 end
 
 function clearClusters(h)
-    for child = h.Parent.Children'
-        if isa(child, 'matlab.graphics.chart.decoration.ConstantLine')
-            delete(child);
-        end
-    end
+    delete(h.Parent.Parent.UserData.lines);
 end
 
 function zoomFcn(h, membership, order)
