@@ -25,15 +25,22 @@ end
 
 function h = createEdgeMap(graph, order)
     h = image(cdata(graph, order, 1));
-    h.AlphaData = graph(order(1, :), order(1, :));
+    h.AlphaData = abs(graph(order(1, :), order(1, :)));
 end
 
 function colors = cdata(graph, order, level)
-    colors = zeros(size(graph, 1), size(graph, 1), 3);
-    idx = graph(order(level, :), order(level, :)) > 0;
-    colors(:, :, 1) = idx .* 0.404;
-    colors(:, :, 2) = idx .* 0.035;
-    colors(:, :, 3) = idx .* 0.11;
+    red = zeros(size(graph, 1)) + 0;
+    green = zeros(size(graph, 1)) + 0.4470;
+    blue = zeros(size(graph, 1)) + 0.7410;
+
+    if min(graph, [], 'all') < 0
+        negatives = graph(order(level, :), order(level, :)) < 0;
+        red(negatives) = 0.6359;
+        green(negatives) = 0.0780;
+        blue(negatives) = 0.1840;
+    end
+
+    colors = cat(3, red, green, blue);
 end
 
 function calculateBoundaries(h, membership, order, level)
@@ -104,7 +111,7 @@ function switchLevel(button, h, graph, membership, order, ~)
     h.Parent.Parent.UserData.level = level;
 
     h.CData = cdata(graph, order, level);
-    h.AlphaData = graph(order(level, :), order(level, :));
+    h.AlphaData = abs(graph(order(level, :), order(level, :)));
 
     clearClusters(h);
     calculateBoundaries(h, membership, order, level);
