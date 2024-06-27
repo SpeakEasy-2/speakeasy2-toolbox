@@ -71,10 +71,10 @@ function drawClusters(h)
 
     hold on
     lines = [
-        xline(leftBoundary(idx) - 0.5, alpha = 0.1, linestyle = '--'),
-        yline(leftBoundary(idx) - 0.5, alpha = 0.1, linestyle = '--'),
-        xline(rightBoundary(idx) + 0.5, alpha = 0.1, linestyle = '--'),
-        yline(rightBoundary(idx) + 0.5, alpha = 0.1, linestyle = '--'),
+        xline(leftBoundary(idx) - 0.5, alpha = 0.1, linestyle = '--');
+        yline(leftBoundary(idx) - 0.5, alpha = 0.1, linestyle = '--');
+        xline(rightBoundary(idx) + 0.5, alpha = 0.1, linestyle = '--');
+        yline(rightBoundary(idx) + 0.5, alpha = 0.1, linestyle = '--');
     ];
     hold off
     fig.UserData.lines = lines;
@@ -107,7 +107,7 @@ function zoomFcn(h, membership, order)
 end
 
 function switchLevel(button, h, graph, membership, order, ~)
-    level = str2num(button.SelectedObject.String);
+    level = str2double(button.SelectedObject.String);
     h.Parent.Parent.UserData.level = level;
 
     h.CData = cdata(graph, order, level);
@@ -129,9 +129,9 @@ function addGUI(h, graph, membership, order, levels)
                        "Position", bgPos, ...
                        "SelectionChangedFcn", callback);
     pos = [0.1, 0.9, 0.5, 0.1];
-    buttons = [];
+    buttons = zeros(1, levels);
     for l = 1:levels
-        buttons(end+1) = uicontrol(bg, "Style", "radiobutton", ...
+        buttons(l) = uicontrol(bg, "Style", "radiobutton", ...
                                    "Units", "Normalized", ...
                                    "Position", pos, ...
                                    "String", sprintf("%d", l));

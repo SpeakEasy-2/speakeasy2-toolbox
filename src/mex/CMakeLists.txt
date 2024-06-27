@@ -34,7 +34,7 @@ target_include_directories(mexVersion
 matlab_add_mex(NAME isdirected
   MODULE
   SRC isdirected.c
-  LINK_TO mxIgraph
+  LINK_TO mxIgraph SpeakEasy2
   R2018a
 )
 
