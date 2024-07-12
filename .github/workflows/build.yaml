@@ -120,7 +120,7 @@ jobs:
           git submodule update --recursive
 
       - name: Install dependencies
-        run: brew install ninja autoconf automake libtool
+        run: brew install ninja
 
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v2
