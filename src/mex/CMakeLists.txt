@@ -16,7 +16,18 @@ matlab_add_mex(NAME mexOrder
   R2018a
 )
 
-target_include_directories(mexSE2
+target_include_directories(mexOrder
+  PRIVATE ${Matlab_INCLUDE_DIRS}
+)
+
+matlab_add_mex(NAME mexKnn
+  MODULE
+  SRC knn_graph.c
+  LINK_TO SpeakEasy2 mxIgraph
+  R2018a
+)
+
+target_include_directories(mexKnn
   PRIVATE ${Matlab_INCLUDE_DIRS}
 )
 
