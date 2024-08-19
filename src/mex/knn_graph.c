@@ -10,6 +10,8 @@ void mexFunction(int nlhs, mxArray* plhs[], int nrhs, mxArray const* prhs[])
   igraph_t graph;
   igraph_vector_t weights;
 
+  igraph_set_error_handler(mxIgraphErrorHandlerMex);
+
   mxIgraphMatrixFromArray(prhs[0], &mat, false);
 
   se2_knn_graph(&mat, k, &graph, is_weighted ? &weights : NULL);
