@@ -1,7 +1,7 @@
 #include <mxIgraph.h>
 #include <speak_easy_2.h>
 
-void mexFunction(int nlhs, mxArray* plhs[], int nrhs, mxArray const* prhs[])
+void mexFunction(int nlhs, mxArray *plhs[], int nrhs, mxArray const *prhs[])
 {
   igraph_t graph;
   igraph_vector_t weights;

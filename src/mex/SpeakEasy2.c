@@ -22,7 +22,7 @@ static void se2_init(void)
   igraph_set_warning_handler(mxIgraphWarningHandlerMex);
 }
 
-void mexFunction(int nlhs, mxArray* plhs[], int nrhs, mxArray const* prhs[])
+void mexFunction(int nlhs, mxArray *plhs[], int nrhs, mxArray const *prhs[])
 {
   if (!is_initialized) {
     se2_init();
@@ -32,15 +32,17 @@ void mexFunction(int nlhs, mxArray* plhs[], int nrhs, mxArray const* prhs[])
   igraph_t graph;
   igraph_vector_t weights;
   se2_neighs neigh_list;
-  mxArray const* method_options = prhs[1];
+  mxArray const *method_options = prhs[1];
   igraph_matrix_int_t membership;
 
   igraph_set_error_handler(mxIgraphErrorHandlerMex);
 
-  igraph_bool_t isdirected = mxIgraphGetBool(method_options, "isdirected") ?
-                             IGRAPH_DIRECTED : IGRAPH_UNDIRECTED;
+  igraph_bool_t isdirected = mxIgraphGetBool(method_options, "isdirected")
+                             ? IGRAPH_DIRECTED
+                             : IGRAPH_UNDIRECTED;
   se2_options opts = {
-    .discard_transient = mxIgraphGetInteger(method_options, "discardTransient"),
+    .discard_transient =
+    mxIgraphGetInteger(method_options, "discardTransient"),
     .independent_runs = mxIgraphGetInteger(method_options, "independentRuns"),
     .max_threads = mxIgraphGetInteger(method_options, "maxThreads"),
     .minclust = mxIgraphGetInteger(method_options, "minCluster"),
@@ -48,7 +50,8 @@ void mexFunction(int nlhs, mxArray* plhs[], int nrhs, mxArray const* prhs[])
     .random_seed = mxIgraphGetInteger(method_options, "seed"),
     .subcluster = mxIgraphGetInteger(method_options, "subcluster"),
     .target_clusters = mxIgraphGetInteger(method_options, "targetClusters"),
-    .target_partitions = mxIgraphGetInteger(method_options, "targetPartitions"),
+    .target_partitions =
+    mxIgraphGetInteger(method_options, "targetPartitions"),
     .verbose = mxIgraphGetBool(method_options, "verbose")
   };
 
