@@ -1,7 +1,13 @@
+set(ut_lib "libut")
+cmake_path(APPEND_STRING ut_lib ${CMAKE_SHARED_LIBRARY_SUFFIX})
+set(Matlab_UT_LIBRARY ${Matlab_ROOT_DIR})
+cmake_path(APPEND Matlab_UT_LIBRARY
+	"bin" ${Matlab_ARCH} ${ut_lib})
+
 matlab_add_mex(NAME mexSE2
   MODULE
   SRC SpeakEasy2.c
-  LINK_TO SpeakEasy2 mxIgraph
+  LINK_TO SpeakEasy2 mxIgraph ${Matlab_UT_LIBRARY}
   R2018a
 )
 
