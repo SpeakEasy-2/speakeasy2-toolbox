@@ -1,10 +1,10 @@
 {
-  description = "Igraph SE2 implementation";
+  description = "igraph SE2 implementation";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nix-matlab = {
-      url = "/home/voidee/clones/nix-matlab";
+      url = "gitlab:doronbehar/nix-matlab";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -30,9 +30,6 @@
             flex
             libxml2
           ]);
-          shellHook = ''
-            export OMP_NUM_THREADS=16
-          '';
         };
     };
 }
