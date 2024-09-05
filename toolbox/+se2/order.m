@@ -1,4 +1,4 @@
-function indices = order(graph, membership)
+function indices = order(graph, membership, opts)
 %ORDER provide indices to reorder nodes based on membership
 %   INDICES = ORDER(GRAPH, MEMBERSHIP) use the membership found by SPEAKEASY2
 %   to order nodes. Nodes are ordered based on the community they are in, such
@@ -17,7 +17,8 @@ function indices = order(graph, membership)
     arguments
         graph (:, :);
         membership (:, :) {mustBeInteger, mustBeNonnegative};
+        opts.isdirected = isdirected(graph);
     end
 
-    indices = mexOrder(graph, membership);
+    indices = mexOrder(graph, membership, opts);
 end

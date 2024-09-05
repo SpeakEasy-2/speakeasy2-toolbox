@@ -95,7 +95,6 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
     "C:\\msys64\\ucrt64\\bin"
     "D:\\msys64\\mingw64\\bin"
     "D:\\msys64\\ucrt64\\bin"
-    "${Matlab_ROOT_DIR}\\bin\\win64"
     PRE_EXCLUDE_REGEXES
     "api-ms-*"
     "libmx"
