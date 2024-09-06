@@ -29,11 +29,3 @@ matlab_add_mex(
   LINK_TO SpeakEasy2 R2018a)
 
 target_include_directories(mexVersion PRIVATE ${Matlab_INCLUDE_DIRS})
-
-matlab_add_mex(
-  NAME isdirected
-  MODULE
-  SRC isdirected.c
-  LINK_TO mxIgraph SpeakEasy2 R2018a)
-
-target_include_directories(isdirected PRIVATE ${Matlab_INCLUDE_DIRS})

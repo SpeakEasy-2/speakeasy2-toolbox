@@ -1,13 +1,13 @@
 function edgemap(graph, membership)
     arguments
-        graph (:, :);
-        membership (:, :) {mustBeInteger, mustBeNonnegative};
+        graph {igutils.mustBeGraph};
+        membership (:, :) {mustBeInteger, mustBePositive};
     end
 
     order = se2.order(graph, membership);
     levels = size(membership, 1);
 
-    graph =  graph / max(graph, [], 'all');
+    graph =  graph.adjacency() / max(graph.adjacency(), [], 'all');
     h = createEdgeMap(graph, order);
     h.Parent.Parent.UserData = struct("level", 1);
 

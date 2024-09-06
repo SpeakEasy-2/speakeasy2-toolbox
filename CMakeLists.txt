@@ -75,7 +75,7 @@ install(
   COMPONENT toolbox)
 
 install(
-  TARGETS mexSE2 isdirected
+  TARGETS mexSE2
   DESTINATION speakeasy2/toolbox/private
   RUNTIME_DEPENDENCY_SET toolbox_deps
   COMPONENT toolbox)
@@ -97,9 +97,11 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
     "D:\\msys64\\ucrt64\\bin"
     PRE_EXCLUDE_REGEXES
     "api-ms-*"
+    "ext-ms-*"
     "libmx"
     "libmex"
-    "ext-ms-*"
+    POST_EXCLUDE_REGEXES
+    ".*system32/.*\\.dll"
     DESTINATION
     speakeasy2/toolbox/private
     COMPONENT

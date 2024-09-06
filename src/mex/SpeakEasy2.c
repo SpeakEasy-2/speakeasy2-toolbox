@@ -13,6 +13,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, mxArray const *prhs[])
   igraph_vector_t weights;
   se2_neighs neigh_list;
   mxArray const *method_options = prhs[1];
+  mxArray const *graph_options = prhs[2];
   igraph_matrix_int_t membership;
 
   se2_options opts = {
@@ -33,7 +34,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, mxArray const *prhs[])
     .verbose = mxIgraphBoolFromOptions(method_options, "verbose")
   };
 
-  mxIgraphFromArray(prhs[0], &graph, &weights, method_options);
+  mxIgraphFromArray(prhs[0], &graph, &weights, graph_options);
   IGRAPH_FINALLY(igraph_destroy, &graph);
   IGRAPH_FINALLY(igraph_vector_destroy, &weights);
 

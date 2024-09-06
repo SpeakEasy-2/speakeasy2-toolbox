@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Ability to interrupt SE2 and ordering.
+- Dependency on igraph toolbox to enable use of igutils for argument validation and parsing.
 
 ### Changed
 
