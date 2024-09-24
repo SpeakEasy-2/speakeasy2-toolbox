@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Pin libSE2 to tagged release v0.1.8 from development branch.
+
 ### Fixed
 
 - Edgemap was always assuming graph's were in a MATLAB builtin graph type form.
+- Add check for graph weights before passing into SE2.
 
 ## [0.1.4] 2024-09-06
 
