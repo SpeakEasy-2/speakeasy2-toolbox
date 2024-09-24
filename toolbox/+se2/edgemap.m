@@ -7,7 +7,11 @@ function edgemap(graph, membership)
     order = se2.order(graph, membership);
     levels = size(membership, 1);
 
-    graph =  graph.adjacency() / max(graph.adjacency(), [], 'all');
+    if igutils.isgraph(graph)
+        graph = graph.adjacency();
+    end
+
+    graph = graph / max(graph, [], 'all');
     h = createEdgeMap(graph, order);
     h.Parent.Parent.UserData = struct("level", 1);
 
