@@ -3,11 +3,11 @@
     "flake-compat": {
       "flake": false,
       "locked": {
-        "lastModified": 1673956053,
-        "narHash": "sha256-4gtG9iQuiKITOjNQQeQIpoIB6b16fm+504Ch3sNKLd8=",
+        "lastModified": 1696426674,
+        "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
         "owner": "edolstra",
         "repo": "flake-compat",
-        "rev": "35bb57c0c8d8b62bbfd284272c928ceb64ddbde9",
+        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
         "type": "github"
       },
       "original": {
@@ -24,30 +24,30 @@
         ]
       },
       "locked": {
-        "dirtyRev": "a4e89d2561f6b22c8ffeba1546e8ff01f6a38eb2-dirty",
-        "dirtyShortRev": "a4e89d2-dirty",
-        "lastModified": 1685977267,
-        "narHash": "sha256-OIlHWZ2oIQ4LBPnddqln1bEXVnqHdAy5CASOw/2IPSU=",
-        "type": "git",
-        "url": "file:///home/voidee/clones/nix-matlab"
+        "lastModified": 1728054098,
+        "narHash": "sha256-pvVBC+IHWLZqwD+rLTqtXbNgFng8qZZXm+KTyoS5lR8=",
+        "owner": "doronbehar",
+        "repo": "nix-matlab",
+        "rev": "145957fbf1490548bac2ee5a58daddf04fcfa5dd",
+        "type": "gitlab"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/voidee/clones/nix-matlab"
+        "owner": "doronbehar",
+        "repo": "nix-matlab",
+        "type": "gitlab"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1725001927,
-        "narHash": "sha256-eV+63gK0Mp7ygCR0Oy4yIYSNcum2VQwnZamHxYTNi+M=",
+        "lastModified": 1728061008,
+        "narHash": "sha256-qjyJDtwmJckqDyXHmBIiN04kzby/TX/kPYmclBXlROA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "6e99f2a27d600612004fbd2c3282d614bfee6421",
+        "rev": "8bca501bf31b54ae2022fe5065ab475d75f7560e",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-24.05",
         "repo": "nixpkgs",
         "type": "github"
       }

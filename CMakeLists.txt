@@ -7,6 +7,10 @@ project(
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Ensures compile-commands gets location of standard includes. Needed for Nix.
+set(CMAKE_C_STANDARD_INCLUDE_DIRECTORIES
+  ${CMAKE_C_IMPLICIT_INCLUDE_DIRECTORIES})
+
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(BUILD_SHARED_LIBS OFF)
 

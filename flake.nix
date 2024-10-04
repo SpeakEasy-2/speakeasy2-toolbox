@@ -2,7 +2,7 @@
   description = "igraph SE2 implementation";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs";
     nix-matlab = {
       url = "gitlab:doronbehar/nix-matlab";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,10 +21,11 @@
             matlab-mlint
             matlab-mex
           ]) ++ (with pkgs; [
-            astyle
             cmake
+            clang-tools
             ninja
             gdb
+
             # igraph dependencies
             bison
             flex
