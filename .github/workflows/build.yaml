@@ -5,7 +5,7 @@ on:
     branches:
       - devel
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - "v[0-9]+.[0-9]+.[0-9]+"
 
 permissions:
   checks: write
@@ -15,7 +15,7 @@ permissions:
 jobs:
   build-linux:
     name: Build Linux toolbox
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     env:
       CC: gcc-10
       CXX: g++-10
@@ -58,7 +58,7 @@ jobs:
 
     defaults:
       run:
-        shell:  msys2 {0}
+        shell: msys2 {0}
 
     steps:
       - uses: actions/checkout@v4
@@ -117,9 +117,6 @@ jobs:
           git submodule init
           git submodule update --recursive
 
-      - name: Install dependencies
-        run: brew install ninja
-
       - name: Set up MATLAB
         uses: matlab-actions/setup-matlab@v2
 
@@ -170,5 +167,5 @@ jobs:
       - name: Upload generic toolbox
         uses: actions/upload-artifact@v4
         with:
-            name: SpeakEasy2-toolbox-${{ github.sha }}
-            path: release/*
+          name: SpeakEasy2-toolbox-${{ github.sha }}
+          path: release/*
