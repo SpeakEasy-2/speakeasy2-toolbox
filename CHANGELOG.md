@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Bump matlab-igraph version to devel.
+- Bump matlab-igraph version to 0.2.2.
 - Bump libSE2 version to devel.
 
 ## [0.1.6] 2024-10-07
