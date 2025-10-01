@@ -5,6 +5,8 @@ project(
   DESCRIPTION "MATLAB toolbox for running SpeakEasy2."
   LANGUAGES C CXX)
 
+enable_testing()
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Ensures compile-commands gets location of standard includes. Needed for Nix.
@@ -71,6 +73,7 @@ message(STATUS "")
 
 add_subdirectory(vendor/matlab-igraph/mxIgraph)
 add_subdirectory(src/mex)
+add_subdirectory(tests)
 
 # Installation
 install(

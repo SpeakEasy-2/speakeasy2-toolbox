@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Tests.
+
 ### Changed
 
 - [BREAKING] moved `speakeasy2` -> `se2.cluster` so it's confined to the toolbox namespace.
