@@ -1,19 +1,19 @@
-function [memb, ordering] = speakeasy2(graph, graphOpts, opts, attribute)
-%SPEAKEASY2 community detection
-%   MEMBERSHIP = SPEAKEASY2(GRAPH) Cluster the GRAPH.
+function [memb, ordering] = cluster(graph, graphOpts, opts, attribute)
+%CLUSTER community detection
+%   MEMBERSHIP = CLUSTER(GRAPH) Cluster the GRAPH.
 %
-%   [MEMB, ORDERING] = SPEAKEASY2(GRAPH) provide an index vector to order nodes
+%   [MEMB, ORDERING] = CLUSTER(GRAPH) provide an index vector to order nodes
 %   based on the community they are in, in order from largest community to
 %   smallest. This can be used with HEATMAP or IMAGESC to help display
 %   communities. Ordering can also be created with SE2.ORDER.
 %
-%   GRAPH = SPEAKEASY2(GRAPH, ..., 'result', NAME) if GRAPH can hold an
-%   attribute (if represented by a MATLAB graph, default), the results are
-%   attached to the graph as node attribute NAME.
+%   GRAPH = CLUSTER(GRAPH, ..., 'result', NAME) if GRAPH can hold an attribute
+%   (if represented by a MATLAB graph, default), the results are attached to
+%   the graph as node attribute NAME.
 %
-%   MEMBERSHIP = SPEAKEASY2(G, 'PARAM1', VAL1, 'PARAM2', VAL2, ...) the
-%   behavior of speakeasy2 can be modified through name-value pairs. Available
-%   options are described in the table below.
+%   MEMBERSHIP = CLUSTER(G, 'PARAM1', VAL1, 'PARAM2', VAL2, ...) the behavior
+%   of speakeasy2 can be modified through name-value pairs. Available options
+%   are described in the table below.
 %
 %        Name              Description
 %       ------------------------------------------------------------------
