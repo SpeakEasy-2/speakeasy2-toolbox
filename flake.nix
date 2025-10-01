@@ -15,7 +15,7 @@
       pkgs = import nixpkgs { inherit system; };
     in {
       devShells.${system}.default =
-        (pkgs.mkShell.override { stdenv = pkgs.gcc10Stdenv; }) {
+        (pkgs.mkShell.override { stdenv = pkgs.gcc13Stdenv; }) {
           packages = (with nix-matlab.packages.${system}; [
             matlab
             matlab-mlint
