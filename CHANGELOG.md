@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [BREAKING] moved `speakeasy2` -> `se2.cluster` so it's confined to the toolbox namespace.
 
+### Fixed
+
+- Include mex files in +se2 subdirectory in installation.
+
 ## [0.1.8] 2025-09-04
 
 ### Changed

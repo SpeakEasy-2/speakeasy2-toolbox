@@ -34,9 +34,6 @@ endif()
 
 message(STATUS "${CMAKE_PROJECT_NAME} version: ${CMAKE_PACKAGE_VERSION}")
 
-# NOTE: speakeasy2 builds the igraph C lib.
-add_subdirectory(vendor/speakeasy2)
-
 find_package(
   Matlab
   COMPONENTS MAIN_PROGRAM MAT_LIBRARY MX_LIBRARY MEX_COMPILER
@@ -72,6 +69,7 @@ message(STATUS "Matlab arch: ${Matlab_ARCH}")
 message(STATUS "")
 
 add_subdirectory(vendor/matlab-igraph/mxIgraph)
+add_subdirectory(vendor/speakeasy2)
 add_subdirectory(src/mex)
 add_subdirectory(tests)
 
@@ -81,14 +79,14 @@ install(
   DESTINATION speakeasy2
   COMPONENT toolbox)
 
-install(
-  TARGETS mexSE2
-  DESTINATION speakeasy2/toolbox/private
-  RUNTIME_DEPENDENCY_SET toolbox_deps
-  COMPONENT toolbox)
+file(
+  GLOB mex_files
+  RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/src/mex/
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/mex/*.c)
+string(REGEX REPLACE "[.]c" "" mex_names "${mex_files}")
 
 install(
-  TARGETS mexOrder mexVersion
+  TARGETS ${mex_names}
   DESTINATION speakeasy2/toolbox/+se2/private
   RUNTIME_DEPENDENCY_SET toolbox_deps
   COMPONENT toolbox)
@@ -111,7 +109,7 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
     POST_EXCLUDE_REGEXES
     ".*system32/.*\\.dll"
     DESTINATION
-    speakeasy2/toolbox/private
+    speakeasy2/toolbox/+se2/private
     COMPONENT
     toolbox)
 endif()

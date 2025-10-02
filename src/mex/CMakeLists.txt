@@ -1,31 +1,13 @@
-matlab_add_mex(
-  NAME mexSE2
-  MODULE
-  SRC SpeakEasy2.c
-  LINK_TO SpeakEasy2 mxIgraph R2018a)
+file(GLOB src_files CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.c)
 
-target_include_directories(mexSE2 PRIVATE ${Matlab_INCLUDE_DIRS})
+foreach(src_file ${src_files})
+  get_filename_component(src_name ${src_file} NAME_WE)
+  matlab_add_mex(
+    NAME ${src_name}
+    MODULE
+    SRC ${src_file} NO_IMPLICIT_LINK_TO_MATLAB_LIBRARIES
+    LINK_TO SpeakEasy2 mxIgraph ${Matlab_MEX_LIBRARY} ${Matlab_MX_LIBRARY}
+    R2018a)
 
-matlab_add_mex(
-  NAME mexOrder
-  MODULE
-  SRC order.c
-  LINK_TO SpeakEasy2 mxIgraph R2018a)
-
-target_include_directories(mexOrder PRIVATE ${Matlab_INCLUDE_DIRS})
-
-matlab_add_mex(
-  NAME mexKnn
-  MODULE
-  SRC knn_graph.c
-  LINK_TO SpeakEasy2 mxIgraph R2018a)
-
-target_include_directories(mexKnn PRIVATE ${Matlab_INCLUDE_DIRS})
-
-matlab_add_mex(
-  NAME mexVersion
-  MODULE
-  SRC version.c
-  LINK_TO SpeakEasy2 R2018a)
-
-target_include_directories(mexVersion PRIVATE ${Matlab_INCLUDE_DIRS})
+  target_include_directories(${src_name} PRIVATE ${Matlab_INCLUDE_DIRS})
+endforeach()

@@ -1,6 +1,6 @@
 function buildAllToolboxes(artifactsDir, outDir, version)
     tmpDir = "tmp/speakeasy2";
-    compiledFileDirs = {"private"};
+    compiledFileDirs = {"+se2/private"};
     for d = dir(artifactsDir + "/SpeakEasy2-*")'
         toolboxDir = fullfile(artifactsDir, d(1).name, ...
                               "speakeasy2", "toolbox");
