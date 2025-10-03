@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - [BREAKING] moved `speakeasy2` -> `se2.cluster` so it's confined to the toolbox namespace.
+- Update matlab-igraph -> 0.2.4
 
 ### Fixed
 
