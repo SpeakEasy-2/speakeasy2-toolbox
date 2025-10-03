@@ -68,8 +68,8 @@ message(STATUS "MEX extension: ${Matlab_MEX_EXTENSION}")
 message(STATUS "Matlab arch: ${Matlab_ARCH}")
 message(STATUS "")
 
-add_subdirectory(vendor/matlab-igraph/mxIgraph)
 add_subdirectory(vendor/speakeasy2)
+add_subdirectory(vendor/matlab-igraph/mxIgraph)
 add_subdirectory(src/mex)
 add_subdirectory(tests)
 
